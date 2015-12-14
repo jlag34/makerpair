@@ -159,7 +159,7 @@ app.get('/logout', function(req, res) {
     if(err) {
       throw err;
     } else {
-      res.redirect('/login'); 
+      res.redirect('/'); 
     }
   });
 });
