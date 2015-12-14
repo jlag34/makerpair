@@ -4,5 +4,28 @@ margin-top: 15%;
 }
 
 #auth > p {
-  margin-left: 35%;
+  margin-left: 34%;
 }
+
+#welcomeWrapper {
+  height: 320px;
+  width: 75%;
+  margin-left: 10%;
+  border-color: black;
+  border: solid;
+}
+
+#pic{
+  left: 40px;
+}
+
+#welcome {
+  float: right;
+  margin-top: 5%;
+  margin-right: 30%;
+  text-align: center;
+}
+
+
+
+

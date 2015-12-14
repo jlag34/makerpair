@@ -1,18 +1,13 @@
-var bodyParser = require('body-parser');
-var partials = require('express-partials');
 var express = require('express');
-var app = express();
 var mongoose = require('mongoose');
 var session = require('express-session');
+var app = express();
 
-
+require('./config/middleware.js')(app, express);
+mongoose.connect('mongodb://localhost/makerpair');
 app.set('view engine', 'ejs');
 
 
-
-///////MIDDLEWARE////////
-app.use(partials());
-app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(session({//Always requires these 3 things:
                  //Keycode for what it will use on cookies
@@ -23,24 +18,13 @@ app.use(session({//Always requires these 3 things:
                  //Even if nothing is changed, save again
                  resave: true }));
 
-app.use(express.static(__dirname +'/public'));
-
-/////////////////////////
-
-
-
-
-
-
 
 
 ////////SCHEMA & CONNECT ///////////
 
 var Schema = mongoose.Schema;
-var ObjectId = Schema.ObjectId;
 
 var User = mongoose.model('User', new Schema({
-  id: ObjectId,
   cohort: String,
   username: {type: String, unique: true},
   password: String
@@ -53,7 +37,6 @@ var User = mongoose.model('User', new Schema({
 
 // })
 
-mongoose.connect('mongodb://localhost/makerpair');
 
 ///////////////////////////////////////
 
@@ -164,8 +147,9 @@ app.get('/logout', function(req, res) {
   });
 });
 
-app.listen(3000);
-console.log('server up');
+
+
+module.exports = app;
 
 
 
