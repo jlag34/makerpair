@@ -1,6 +1,11 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var session = require('express-session');
+mongoose.Promise = require('bluebird');
+
+
+
+
 var app = express();
 
 require('./config/middleware.js')(app, express);
@@ -33,36 +38,24 @@ var User = mongoose.model('User', new Schema({
 
 ///////////////////////////////////////
 
-//This will display all users
-// User.find({}, function(err,docs){
-// if (!err){
-//   // console.log(docs);
-//   // process.exit();
-// } else {throw err;}
 
-// });
-var randomUser = function(cb) {
-  var result = User.count().exec(function(err, count){
+////////////GET RANDOM USER///////////////
+var randomUser = function(req, res){
 
+User.count().exec()
+  .then(function(count){
     var random = Math.floor(Math.random() * count);
+    return User.findOne().skip(random).exec()
+    .then(function(result){
+      res.status(200).send(result.username);
+    })
+  })
+};
 
-    User.findOne().skip(random).exec(
-      function (err, result) {
-        return result.username;
-      });
+app.get('/pair', randomUser);
 
-  });
-  cb(result);
-}
+////////////////////////////////////////////
 
-
-
-app.get('/pair', function(req, res){
-  randomUser(function(result){
-    console.log(result);
-    res.end(result);
-  });  
-});
 
 ////////////////REGISTER/////////////
 
@@ -169,6 +162,19 @@ app.get('/logout', function(req, res) {
 
 
 module.exports = app;
+
+
+
+
+
+//This will display all users
+// User.find({}, function(err,docs){
+// if (!err){
+//   // console.log(docs);
+//   // process.exit();
+// } else {throw err;}
+
+// });
 
 
 

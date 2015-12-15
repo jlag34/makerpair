@@ -3,12 +3,11 @@
 
 $(function(){
     $('#buttonOne').click(function (){
-        console.log('it went off!');
         $.ajax({
             url:'/pair',
             type: 'GET',
             success: function(result){
-                    console.log('this is the result:', result); 
+                    $('.bb').html(result);
             },
             error: function(){
                 console.log('bummer, error');
@@ -44,6 +43,7 @@ $(function(){
 <div id='sprintWrapper'>
   <div class='sprintTable'>
     <button id="buttonOne">I need a pair!</button>
+    <p class='bb'></p>
   </div>
 
   <div class='sprintTable'>
