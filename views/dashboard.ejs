@@ -1,4 +1,34 @@
-<h1>Dashboard</h1>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type='text/javascript'>
+
+$(function(){
+    $('#buttonOne').click(function (){
+        console.log('it went off!');
+        $.ajax({
+            url:'/pair',
+            type: 'GET',
+            success: function(result){
+                    console.log('this is the result:', result); 
+            },
+            error: function(){
+                console.log('bummer, error');
+            }
+        });
+    });
+});
+
+
+</script>
+
+
+
+<div class="row">
+  <h1>Dashboard</h1>
+  <form action='/logout'>
+    <input type='submit' value='Logout'>
+  </form>
+</div>
+
 <div id='welcomeWrapper'>
   <img id='pic' src='hodor.png' />
   <div id='welcome'>
@@ -7,17 +37,28 @@
   </div>
 </div>
 
+
+
+
+
 <div id='sprintWrapper'>
-  
+  <div class='sprintTable'>
+    <button id="buttonOne">I need a pair!</button>
+  </div>
+
+  <div class='sprintTable'>
+    <button>I need a pair!</button>
+  </div>
+
+  <div class='sprintTable'>
+    <button>I need a pair!</button>
+  </div>
 </div>
 
-<!--
-<form action='/logout'>
-  <input type='submit' value='Logout'>
-</form>
 
-  Need this but it keeps messing up my format
--->
+
+
+
 
 
 

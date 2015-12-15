@@ -30,20 +30,39 @@ var User = mongoose.model('User', new Schema({
   password: String
 }));
 
-// var Assignment = mongoose.model('Assignment', new Schema(){
-//   id: ObjectId,
-//   name: String,
-//   password: String
-
-// })
-
 
 ///////////////////////////////////////
 
+//This will display all users
+// User.find({}, function(err,docs){
+// if (!err){
+//   // console.log(docs);
+//   // process.exit();
+// } else {throw err;}
+
+// });
+var randomUser = function(cb) {
+  var result = User.count().exec(function(err, count){
+
+    var random = Math.floor(Math.random() * count);
+
+    User.findOne().skip(random).exec(
+      function (err, result) {
+        return result.username;
+      });
+
+  });
+  cb(result);
+}
 
 
 
-
+app.get('/pair', function(req, res){
+  randomUser(function(result){
+    console.log(result);
+    res.end(result);
+  });  
+});
 
 ////////////////REGISTER/////////////
 
@@ -154,7 +173,11 @@ module.exports = app;
 
 
 
-
+//Mongo commands
+//Mongo - to run
+//use 'db name'; - in my case, makerpair
+//show collections; - show all the tables in db
+//db.users.find(); - shows all users that are in the table 
 
 
 

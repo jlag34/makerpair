@@ -1,9 +1,28 @@
-#auth > img {
+.row {
+  width: 95%;
+  min-height: 60px;
+  margin: 0 auto;
+  text-align: right;
+  padding-right: 5%;
+}
+.row h1 {
+  text-align: left;
+  display: block;
+  width: 150px;
+  float: left;
+}
+.row form {
+  width: 200px;
+  float: right;
+  padding-top: 20px;
+}
+
+#auth img {
 margin-left: 41%;
 margin-top: 15%;
 }
 
-#auth > p {
+#auth p {
   margin-left: 34%;
 }
 
@@ -13,10 +32,11 @@ margin-top: 15%;
   margin-left: 10%;
   border-color: black;
   border: solid;
+  margin-bottom: 3%;
 }
 
-#pic{
-  left: 40px;
+#welcomeWrapper img{
+  float: left;
 }
 
 #welcome {
@@ -26,6 +46,12 @@ margin-top: 15%;
   text-align: center;
 }
 
-
+.sprintTable {
+  height: 150px;
+  width: 75%;
+  margin-left: 10%;
+  border-color: black;
+  border: solid;
+}
 
 
