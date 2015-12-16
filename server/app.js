@@ -38,19 +38,22 @@ var User = mongoose.model('User', new Schema({
 
 ///////////////////////////////////////
 
+var banlist = [null, 'random5', null, null];
+
+
 
 ////////////GET RANDOM USER///////////////
 var randomUser = function(req, res){
-
-User.count().exec()
-  .then(function(count){
-    var random = Math.floor(Math.random() * count);
-    return User.findOne().skip(random).exec()
-    .then(function(result){
-      res.status(200).send(result.username);
-    })
+  var sessName = req.session.user.username;
+  banlist[0] = sessName;
+  User.find({username: {$ne: sessName}}, function(err, result){
+    len = result.length;
+    var random = Math.floor(Math.random() * len);
+    var randUser = result[random].username;
+    res.status(200).send(randUser);
   })
-};
+}
+
 
 app.get('/pair', randomUser);
 

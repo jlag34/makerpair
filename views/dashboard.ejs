@@ -2,12 +2,14 @@
 <script type='text/javascript'>
 
 $(function(){
-    $('#buttonOne').click(function (){
+    $('button').click(function(event){
+    var p = $(this).parent().find('p');
+
         $.ajax({
             url:'/pair',
             type: 'GET',
             success: function(result){
-                    $('.bb').html(result);
+                    p.html(result);
             },
             error: function(){
                 console.log('bummer, error');
@@ -42,16 +44,18 @@ $(function(){
 
 <div id='sprintWrapper'>
   <div class='sprintTable'>
-    <button id="buttonOne">I need a pair!</button>
-    <p class='bb'></p>
+    <button>I need a pair!</button>
+    <p></p>
   </div>
 
   <div class='sprintTable'>
     <button>I need a pair!</button>
+    <p></p>
   </div>
 
   <div class='sprintTable'>
     <button>I need a pair!</button>
+    <p></p>
   </div>
 </div>
 
